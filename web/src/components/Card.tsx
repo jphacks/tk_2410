@@ -1,5 +1,4 @@
 import type React from "react";
-import { ReactNode } from "react";
 import Sentence from "./Sentence";
 import SvgButton from "./SvgButton";
 
