@@ -1,16 +1,25 @@
 import "./App.css";
 import Card from "./components/Card";
-
-function App() {
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NovelPage from "./pages/NovelPage";
+const App = () => {
   return (
-    <>
-      <Card
-        image="https://picsum.photos/200/300"
-        date="2024/10/26"
-        text="石炭をば早や積み果てつ。中等室の卓のほとりはいと静にて、熾熱燈の光の晴れがましきも徒なり。今宵は夜毎にこゝに集ひ来る骨牌仲間も「ホテル」に宿りて、舟に残れるは余一人のみなれば。"
-      />
-    </>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Card
+              image="https://picsum.photos/200/300"
+              date="2024/10/26"
+              text="透明ガールは夏のはじめに現れた。"
+            />
+          }
+        />
+        <Route path="/novel" element={<NovelPage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
