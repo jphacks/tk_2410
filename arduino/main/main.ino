@@ -9,12 +9,14 @@
 #include "esp_err.h"
 
 void app_main() {
-    while (1) {
-        pressed_button_hook();
-        open_close_hook();
-    }
+    // while (1) {
+    //     pressed_button_hook();
+    //     open_close_hook();
+        display_picture();
+    // }
 }
 void setup() {
+  Serial.begin(9600);
   // put your setup code here, to run once:
 }
 

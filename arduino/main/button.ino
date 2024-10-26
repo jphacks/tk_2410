@@ -9,15 +9,17 @@
 #include "esp_err.h"
 
 // ボタンのピン番号
-#define BUTTON_GPIO 32
+#define BUTTON_GPIO 19
 #define BUTTON_OUTPUT_GPIO (gpio_num_t)BUTTON_GPIO
 
 void add_favorite() {
     // お気に入りの処理
+    Serial.println("Add favorite");
 }
 
 void reset() {
     // リセット処理
+    Serial.println("Reset");
 }
 
 void    pressed_button_hook() {
