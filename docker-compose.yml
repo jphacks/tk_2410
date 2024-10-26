@@ -1,0 +1,30 @@
+services:
+  web:
+    platform: linux/amd64
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/app
+    ports:
+      - 5000:5000
+    links:
+      - db
+    tty: true
+
+  db:
+    platform: linux/amd64
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hoshizora
+      MYSQL_USER: password
+      MYSQL_PASSWORD: password
+    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  db-data:
