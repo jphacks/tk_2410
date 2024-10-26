@@ -1,0 +1,248 @@
+openapi: 3.0.0
+info:
+  title: WebSocket API Example
+  version: 1.0.0
+
+paths:
+  # front用
+  /anonymous-login:
+    post:
+      summary: "フロントの接続"
+      parameters:
+        - in: cookie
+          name: sessionId
+          schema:
+            type: string
+          required: false
+          description: "既存セッションID"
+      requestBody:
+        $ref: '#/components/requestBodies/AnonymousLogin'
+      responses:
+        '200':
+          description: "接続成功"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/responses/AnonymousLoginResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  # RasPi用
+  /books/favorites:
+    get:
+      summary: "お気に入りした本の取得"
+      parameters:
+        - in: cookie
+          name: sessionId
+          schema:
+            type: string
+          required: false
+          description: "既存セッションID"
+      responses:
+        '200':
+          $ref: '#/components/responses/BooksRetrieved'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /books/favorites/add:
+    post:
+      summary: "お気に入りに本を追加"
+      description: "本のIDをお気に入りリストに追加します"
+      requestBody:
+        $ref: '#/components/requestBodies/AddFavorite'
+      responses:
+        '201':
+          $ref: '#/components/responses/FavoriteAdded'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /books/random:
+    post:
+      summary: "ランダムな本のIDと画像を取得"
+      description: "ランダムに選ばれた本のIDと画像データをBase64エンコード形式で返します"
+      requestBody:
+        $ref: '#/components/requestBodies/ePaperId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RandomBookData'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /books/qrcode:
+    get:
+      summary: "QRコードを取得"
+      responses:
+        '200':
+          $ref: '#/components/responses/QRCodeRetrieved'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "本のタイトル"
+        sentence:
+          type: string
+          description: "本の一文"
+        link:
+          type: string
+          description: "本が読めるリンク"
+        date:
+          type: string
+          description: "お気に入りした日時"
+        bookImage:
+          type: string
+          description: "Base64エンコードされた画像データ"
+          example: "/9j/4AAQSkZJRgABAQEAAAAAAAD..."
+      example:
+        title: "こころ"
+        sentence: "私わたくしはその人を常に先生と呼んでいた。"
+        link: "https://www.aozora.gr.jp/cards/000148/files/773_14560.html"
+        date: "11月1日"
+        bookimage: "/9j/4AAQSkZJRgABAQEAAAAAAAD..."
+
+  requestBodies:
+    AddFavorite:
+      description: "お気に入りに追加する本のID"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              bookId:
+                type: string
+                description: "追加する本のID"
+              sessionId:
+                type: string
+                description: "電子ペーパーのセッションID"
+            required:
+              - bookId
+              - sessionId
+          example:
+            bookId: "12345"
+            sessionId: "sessionId"
+
+
+    ePaperId:
+      description: "電子ペーパーID"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ePaperId:
+                type: string
+                description: "電子ペーパーID"
+            required:
+              - ePaperId
+          example:
+            ePaperId: "12345"
+
+    AnonymousLogin:
+      description: "デバイスID"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              deviceId:
+                type: string
+                description: "デバイスID"
+            required:
+              - deviceId
+          example:
+            deviceId: "7d5f56e5-5769-43d2-b951-1f72f45a0c50"
+
+  responses:
+    BooksRetrieved:
+      description: "お気に入りの本一覧取得成功"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Book'
+
+    FavoriteAdded:
+      description: "お気に入り追加成功"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "追加成功メッセージ"
+              bookId:
+                type: string
+                description: "追加された本のID"
+
+          example:
+            message: "本がお気に入りに追加されました"
+            bookId: "12345"
+
+    RandomBookData:
+      description: "ランダムな本のIDと画像データ"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              bookId:
+                type: string
+                description: "ランダムに選ばれた本のID"
+              ePaperImage:
+                type: string
+                description: "画像データ(0~3)"
+          example:
+            bookId: "12345"
+            ePaperImage: "010101010..."
+
+    QRCodeRetrieved:
+      description: "QRコードの画像データ"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ePaperImage:
+                type: string
+                description: "画像データ(0~3)"
+              sessionId:
+                type: string
+                description: "電子ペーパーのセッションID"
+          example:
+            ePaperImage: "0101010101..."
+            sessionId: "sessionId"
+
+    AnonymousLoginResponse:
+      description: "セッションIDをCookieに設定して返却"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "ログイン成功メッセージ"
+          example:
+            message: "ログイン成功"
+      headers:
+        Set-Cookie:
+          description: "セッションIDを含むCookie"
+          schema:
+            type: string
+            example: "sessionId=3cac7e0e-aecd-4d8d-b077-123d84723f3f; Path=/; HttpOnly; Secure; SameSite=Strict"
+
+
+
+    ServerError:
+      description: "サーバーエラー"
