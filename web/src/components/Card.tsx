@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
-import SvgButton from "./SvgButton";
+import type React from "react";
+import { ReactNode } from "react";
 import Sentence from "./Sentence";
+import SvgButton from "./SvgButton";
 
 interface CardProps {
   date: string;
@@ -12,7 +13,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ date, image, text }) => {
   return (
     <div className="card">
-      <img src={image}></img>
+      <img src={image} aria-label="本の表紙（仮）" />
       <h2>{date}</h2>
       <Sentence text={text} />
       <SvgButton />
