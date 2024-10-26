@@ -1,18 +1,33 @@
 services:
   web:
+    container_name: web
     platform: linux/amd64
     build:
-      context: ./api
-      dockerfile: Dockerfile
+      context: ./web/
+      target: development
+    entrypoint: ["sh", "-c", "pnpm config set store-dir /tmp/pnpm/store && pnpm install --frozen-lockfile && pnpm dev"]
+    volumes:
+      - ./web:/usr/src/vite
+    ports:
+      - 3000:3000
+    networks:
+        - hoshizora-network
+    restart: always
+
+  api:
+    container_name: api
+    platform: linux/amd64
+    build: ./api
     volumes:
       - ./api:/app
     ports:
       - 5000:5000
-    links:
-      - db
-    tty: true
+    networks:
+        - hoshizora-network
+    restart: always
 
   db:
+    container_name: db
     platform: linux/amd64
     build: ./db
     environment:
@@ -20,11 +35,18 @@ services:
       MYSQL_DATABASE: hoshizora
       MYSQL_USER: password
       MYSQL_PASSWORD: password
-    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
     volumes:
       - db-data:/var/lib/mysql
     ports:
       - 3306:3306
+    networks:
+        - hoshizora-network
+    restart: always
+
+networks:
+  hoshizora-network:
+    name: hoshizora-network
 
 volumes:
   db-data:
+    name: db-data
