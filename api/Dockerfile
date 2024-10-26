@@ -6,8 +6,8 @@ WORKDIR /api
 
 # Environment variables to configure Flask
 ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 # Copy requirements and install dependencies
 COPY requirements.txt ./
@@ -21,4 +21,4 @@ COPY . .
 EXPOSE 5000
 
 # Command to run the application
-CMD ["flask", "--app", "app", "run"]
+CMD ["flask", "run", "--host=0.0.0.0"]
