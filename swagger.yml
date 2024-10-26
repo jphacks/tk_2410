@@ -45,7 +45,6 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
-  /books/favorites/add:
     post:
       summary: "お気に入りに本を追加"
       description: "本のIDをお気に入りリストに追加します"
