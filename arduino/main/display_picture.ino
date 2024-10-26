@@ -119,6 +119,5 @@ void display_picture(void)
 {
   // char flag = 0;
   
-  draw_setup();
   base_draw();
 }

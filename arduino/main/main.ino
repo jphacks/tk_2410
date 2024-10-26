@@ -17,10 +17,13 @@ void app_main() {
 }
 void setup() {
   Serial.begin(9600);
+  draw_setup();
+  // TIMSK0 = 0;
   // put your setup code here, to run once:
 }
 
 void loop() {
+  Serial.println("loop");
   app_main();
 }
 
