@@ -22,7 +22,7 @@
 *                                          All Rights Reserved
 *
 *********************************************************************************************************/
-#include <epd.h>
+#include "epd.h"
 
 
 
@@ -43,6 +43,9 @@ void base_draw(void)
   /*
   draw pixel
   */
+
+  Serial.println("base_draw!");
+
   epd_clear();
   for (j = 0; j < 600; j += 50)
   {
@@ -107,17 +110,46 @@ void draw_setup(void)
   /*
   user led init
   */
+
   pinMode(led, OUTPUT);
   digitalWrite(led, LOW);
+  const int wake_up = 5;
+  const int reset = 4;
   
-  epd_init();
-  epd_wakeup();
+  epd_init(wake_up, reset);
+  epd_wakeup(wake_up);
   epd_set_memory(MEM_NAND);
 }
 
 void display_picture(void)
 {
-  // char flag = 0;
+  char flag = 0;
   
   base_draw();
+
+  // /*
+  // Draw text demo
+  // */
+  // draw_text_demo();
+
+  // /*
+  // Draw bitmap
+  // */
+  // draw_bitmap_demo();
+
+  epd_enter_stopmode();
+  while (1)
+  {
+    if(flag)
+    {
+      flag = 0;
+      digitalWrite(led, LOW);
+    }
+    else
+    {
+      flag = 1;
+      digitalWrite(led, HIGH);
+    }
+    delay(500);
+  }
 }

@@ -16,7 +16,7 @@ void app_main() {
     // }
 }
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(11520);
   draw_setup();
   // TIMSK0 = 0;
   // put your setup code here, to run once:
