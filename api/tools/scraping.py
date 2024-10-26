@@ -5,7 +5,7 @@ from extractContent import extractContentFromUrl
 
 
 def scraping():
-    pageUrl = "https://bungei-zorozoro.com/"
+    pageUrl = "https://bungei-zorozoro.com"
     while pageUrl:
         retries = 3
         for attempt in range(retries):
