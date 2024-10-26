@@ -50,8 +50,8 @@ const NovelPage: React.FC = () => {
   return (
     <div style={containerStyle}>
       <div style={verticalTextStyle}>
-        {animatedText.split("\n").map((line, index) => (
-          <React.Fragment key={index}>
+        {animatedText.split("\n").map((line) => (
+          <React.Fragment key={line}>
             {line}
             <br />
           </React.Fragment>

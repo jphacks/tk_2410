@@ -1,7 +1,8 @@
 import "./App.css";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Card from "./components/Card";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NovelPage from "./pages/NovelPage";
+
 const App = () => {
   return (
     <Router>
