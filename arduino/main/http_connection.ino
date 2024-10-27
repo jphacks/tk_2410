@@ -1,9 +1,0 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/gpio.h"
-#include "rom/gpio.h"
-#include "sdkconfig.h"
-#include "driver/ledc.h"
-#include "esp_err.h"
