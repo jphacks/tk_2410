@@ -14,12 +14,14 @@
 
 void add_favorite() {
     epd_clear();
+    epd_set_color(BLACK, WHITE);
     epd_disp_string("Add favorite !", 0, 0);
     delay(3000);
 }
 
 void reset() {
     epd_clear();
+    epd_set_color(BLACK, WHITE);
     epd_disp_string("Reset", 0, 0);
     delay(3000);
     epd_clear();

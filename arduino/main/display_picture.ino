@@ -32,11 +32,10 @@ const char *map_data = "00000000000000000000000000000000000000000000000000000000
 
 void draw_map(void) {
   int count = 0;
-  epd_clear();
   epd_set_color(BLACK, WHITE);
-  for (j = 0; j < 200; j++)
+  for (int j = 0; j < 200; j++)
   {
-    for (i = 0; i < 300; i++)
+    for (int i = 0; i < 300; i++)
     {
       if (map_data[i * 200 + j] == '1')
       {
@@ -46,7 +45,7 @@ void draw_map(void) {
     }
   }
   epd_udpate();
-  delay(10000);
+  delay(1000);
 }
 
 /*******************************************************************************
