@@ -27,9 +27,9 @@ void reset() {
     epd_clear();
 }
 
-void    pressed_button_hook() {
+void pressed_button_hook() {
     int count = 0;
-    while (gpio_get_level(BUTTON_OUTPUT_GPIO) == 1) {
+    while (digitalRead(BUTTON_GPIO) == LOW) { // ボタンが押されている間
         count++;
         vTaskDelay(100 / portTICK_PERIOD_MS);
         if (count >= 20) {

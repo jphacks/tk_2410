@@ -26,6 +26,8 @@ static bool open_close_action(bool input)
 
 void open_close_hook() {
     // 開く検知をしたら
+    // pinMode(OPEN_CLOSE_GPIO, OUTPUT);
+    digitalWrite(OPEN_CLOSE_GPIO, HIGH);
     if (gpio_get_level(OPEN_OUTPUT_GPIO) == 1) {
         if (open_close_action(true)) {
             epd_clear();
@@ -43,4 +45,5 @@ void open_close_hook() {
         }
     }
     vTaskDelay(100 / portTICK_PERIOD_MS);
+    // display_picture();
 }

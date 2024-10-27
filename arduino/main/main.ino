@@ -10,18 +10,23 @@
 
 #include "epd.h"
 
+#define BUTTON_GPIO 19
+#define BUTTON_OUTPUT_GPIO (gpio_num_t)BUTTON_GPIO
+#define OPEN_CLOSE_GPIO 35
+#define OPEN_OUTPUT_GPIO (gpio_num_t)OPEN_CLOSE_GPIO
+
 void app_main() {
   while (1) {
     pressed_button_hook();
     open_close_hook();
-    display_picture();
   }
 }
 
 void setup() {
   draw_setup();
-
   Serial.begin(115200);
+  pinMode(BUTTON_GPIO, INPUT_PULLUP);
+  pinMode(OPEN_CLOSE_GPIO, OUTPUT);
 }
 
 void loop() {
