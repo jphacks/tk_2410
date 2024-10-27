@@ -1,7 +1,9 @@
 from PIL import Image
 
 
-# Convert image to white/black pixels and encode them to a string
+# Convert image to white/black pixels and encode them to a 0/1 string
+# 0 - black pixel
+# 1 - white pixel
 def encode_image(image_bytes):
     img = Image.open(image_bytes)
 
@@ -13,7 +15,7 @@ def encode_image(image_bytes):
 
     encoded = ""
     for pixel in pixels:
-        encoded += "0" if pixel == 0 else "1"
+        encoded += "1" if pixel == 0 else "0"
 
     return encoded, width, height
 
