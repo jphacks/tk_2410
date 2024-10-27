@@ -60,15 +60,19 @@ void base_draw(void)
   // delay(3000);
   // epd_clear();
   int draw_count = 0;
+  epd_clear();
+  epd_set_color(WHITE, WHITE);
+  epd_fill_rect(0, 0, 800, 600);
   for (j = 0; j < 225; j++)
   {
     for (i = 0; i < 225; i++)
     {
-      if (map_data[i * 225 + j] == '0')
+      if (map_data[i * 225 + j] == '1')
         if (draw_count == 0)
         {
-          epd_draw_pixel(i + 180, j + 300);
-          draw_count = 4;
+          // epd_draw_pixel(i + 180, j + 300);
+          epd_fill_rect(i * 2, j * 2, i * 2, j * 2);
+          draw_count = 3;
         }
         else
         {
