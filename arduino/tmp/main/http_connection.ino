@@ -11,29 +11,29 @@
 
 #define SERVER_URL "https//example.com"
 
-void	http(void)
-{
+// void	http(void)
+// {
 
-	char	buff[101];
-	esp_http_client_config_t config_post = {
-        .url = SERVER_URL
-        // .method = HTTP_METHOD_POST,
-        // .event_handler = client_event_get_handler,
-        // .auth_type = HTTP_AUTH_TYPE_NONE,
-        // .transport_type = HTTP_TRANSPORT_OVER_TCP
-    };
+// 	char	buff[101];
+// 	esp_http_client_config_t config_post = {
+//         .url = SERVER_URL
+//         // .method = HTTP_METHOD_POST,
+//         // .event_handler = client_event_get_handler,
+//         // .auth_type = HTTP_AUTH_TYPE_NONE,
+//         // .transport_type = HTTP_TRANSPORT_OVER_TCP
+//     };
 
-    esp_http_client_handle_t client = esp_http_client_init(&config_post);
+//     esp_http_client_handle_t client = esp_http_client_init(&config_post);
     
-    // esp_http_client_set_post_field(client, payload, len);
-    // esp_http_client_set_header(client, "Content-Type", "image/jpeg");
+//     // esp_http_client_set_post_field(client, payload, len);
+//     // esp_http_client_set_header(client, "Content-Type", "image/jpeg");
 
-    // esp_http_client_perform(client);
-	tesp_http_client_read(client, buff, 100);
-	Serial.println(buff);
-    esp_http_client_cleanup(client);
+//     // esp_http_client_perform(client);
+// 	tesp_http_client_read(client, buff, 100);
+// 	Serial.println(buff);
+//     esp_http_client_cleanup(client);
 
-}
+// }
 
 // #include <WiFi.h>
 // const char* ssid = "aipon";               //  アクセスポイントのSSID
