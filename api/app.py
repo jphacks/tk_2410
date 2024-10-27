@@ -30,7 +30,7 @@ app.add_url_rule("/anonymous-login", "anonymous_login", anonymous_login, methods
 app.add_url_rule("/books/favorites", "get_favorites", get_favorites, methods=["GET"])
 app.add_url_rule("/books/favorites", "add_favorite", add_favorite, methods=["POST"])
 app.add_url_rule("/books/random", "get_random_book", get_random_book, methods=["GET"])
-app.add_url_rule("/books/qrcode", "get_qr_code", get_qr_code, methods=["POST"])
+app.add_url_rule("/qrcode", "get_qr_code", get_qr_code, methods=["POST"])
 
 from controllers import add_book
 sample_book = {

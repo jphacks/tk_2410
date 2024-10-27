@@ -18,6 +18,8 @@ services:
     container_name: api
     platform: linux/amd64
     build: ./api
+    environment:
+      - FRONT_URL=localhost
     volumes:
       - ./api:/api
     ports:

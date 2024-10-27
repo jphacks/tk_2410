@@ -1,18 +1,36 @@
 from flask import jsonify, request
 import json
+import os
+from io import BytesIO
 
-from models import db, EPaperDevice
+from models import EPaperDevice
+from libs import image_encoder
+from libs import qrcode_helper
+import logging
+
+logger = logging.getLogger(__name__ + ".get_qr_code")
+
 
 def get_qr_code():
-    body = json.loads(request.get_data())
+    body_data = request.get_data().decode("utf-8")
+    body = json.loads(body_data)
     device_identifier = body.get("deviceIdentifier")
     if not device_identifier:
         return jsonify({"error": "Device Identifier is required"}), 400
 
-    # check device identifier is exists
-    e_paper_id = EPaperDevice.get_device_id_from_device_identifier(device_identifier)
-    # FIXME
-    # create QR code
+    e_paper_id = EPaperDevice.get_device_id_from_device_identifier(
+        device_identifier
+    )
+    front_url = os.getenv("FRONT_URL")
+    target_url = f"{front_url}/{e_paper_id}"
+    encoded, width, height = None, None, None
+    with BytesIO() as qr_code:
+        qrcode_helper.string2qrcode(qr_code, target_url)
+        encoded, width, height = image_encoder.encode_image(qr_code)
 
-    # 一旦e_paper_idを返す
-    return jsonify({"ePaperId": e_paper_id}), 200
+    return jsonify({
+        "ePaperId": e_paper_id,
+        "width": width,
+        "height": height,
+        "encoded": encoded,
+    }), 200
