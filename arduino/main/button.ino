@@ -29,7 +29,7 @@ void reset() {
 
 void pressed_button_hook() {
     int count = 0;
-    while (digitalRead(BUTTON_GPIO) == LOW) { // ボタンが押されている間
+    while (digitalRead(BUTTON_GPIO) == LOW) {
         count++;
         vTaskDelay(100 / portTICK_PERIOD_MS);
         if (count >= 20) {
