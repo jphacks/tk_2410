@@ -120,7 +120,7 @@ void epd_reset(int reset)
 	digitalWrite(reset, HIGH);
 	delayMicroseconds(500);
 	digitalWrite(reset, LOW);
-	delay(3000);
+	// delay(3000);
 }
 /*******************************************************************************
 * Function Name  : void epd_init(void)
@@ -185,7 +185,7 @@ void epd_set_baud(long baud)
 
 	_putchars(_cmd_buff, 13);
 
-	delay(10);
+	// delay(10);
 	Serial.begin(baud);
 }
 /*******************************************************************************

@@ -8,22 +8,24 @@
 #include "driver/ledc.h"
 #include "esp_err.h"
 
+#include "epd.h"
+
 void app_main() {
-    // while (1) {
-    //     pressed_button_hook();
-    //     open_close_hook();
+    while (1) {
+        pressed_button_hook();
+        open_close_hook();
         display_picture();
-    // }
+    }
 }
 void setup() {
   Serial.begin(11520);
   draw_setup();
   // TIMSK0 = 0;
-  // put your setup code here, to run once:
+
 }
 
 void loop() {
-  Serial.println("loop");
+  // Serial.println("loop");
   app_main();
 }
 
