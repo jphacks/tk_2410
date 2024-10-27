@@ -19,6 +19,7 @@ void app_main() {
   while (1) {
     pressed_button_hook();
     open_close_hook();
+    display_picture();
   }
 }
 

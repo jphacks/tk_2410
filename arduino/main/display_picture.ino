@@ -45,7 +45,7 @@ void draw_map(void) {
     }
   }
   epd_udpate();
-  delay(1000);
+  delay(15000);
 }
 
 /*******************************************************************************
@@ -178,10 +178,10 @@ void display_picture(void)
   draw_map();
 
   epd_clear();
-  epd_disp_string("Hello World !", 0, 0);
+  epd_disp_string("Add favorite !", 0, 0);
   epd_udpate();
-  delay(2000);
-  
+  delay(1500);
+
 
   // char flag = 0;
   // epd_enter_stopmode();
