@@ -1,0 +1,28 @@
+.sentence {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.left-quote,
+.right-quote {
+  width: 20px; /* 画像のサイズ調整 */
+  height: 20px;
+  position: absolute;
+}
+
+.left-quote {
+  left: -25px; /* テキストの左 */
+  top: 0;
+}
+
+.right-quote {
+  right: -25px; /* テキストの右 */
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.text-content {
+  margin: 0 25px; /* 引用符が被らないようにスペースを調整 */
+}

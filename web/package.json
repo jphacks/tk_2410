@@ -11,8 +11,13 @@
     "fix": "biome check --write"
   },
   "dependencies": {
+    "axios": "^1.7.7",
+    "openapi-fetch": "^0.13.0",
+    "openapi-typescript": "^7.4.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
+    "type-fest": "^4.26.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
