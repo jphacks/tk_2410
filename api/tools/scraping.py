@@ -31,9 +31,9 @@ def scraping():
             nameLink = nameLine.find("a")
             name = nameLink.get_text(strip=True)
             content = extractContentFromUrl(
-                "https://bungei-zorozoro.com" + titleUrl
+                pageUrl + titleUrl
             )
-            print("https://bungei-zorozoro.com" + titleUrl, title, name)
+            print(pageUrl + titleUrl, title, name)
             print(content)
             time.sleep(1)
 
