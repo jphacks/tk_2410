@@ -3,6 +3,7 @@ import type { paths } from "./schema";
 
 const client = createClient<paths>({
   baseUrl: "http://localhost:5000",
+  mode: "cors",
   credentials: "include",
   },
 );
