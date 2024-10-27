@@ -4,3 +4,4 @@ mysqlclient==2.2.5
 Flask-Migrate==4.0.7
 PyMySQL==1.1.1
 cryptography==43.0.3
+flask-cors==5.0.0
