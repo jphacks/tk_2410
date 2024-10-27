@@ -19,7 +19,7 @@ services:
     platform: linux/amd64
     build: ./api
     environment:
-      - FRONT_URL=localhost
+      - FRONT_URL="https://suitably-moral-octopus.ngrok-free.app"
     volumes:
       - ./api:/api
     ports:
