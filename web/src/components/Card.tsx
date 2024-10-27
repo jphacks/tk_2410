@@ -15,8 +15,10 @@ const Card: React.FC<CardProps> = ({ date, image, text }) => {
       <img src={image} aria-label="本の表紙（仮）" />
       <h2>{date}</h2>
       <Sentence text={text} />
-      <SvgButton />
-      {/* {children} */}
+      <div className="svg-button-wrapper">
+        <SvgButton />
+        {/* {children} */}
+      </div>
     </div>
   );
 };

@@ -51,6 +51,8 @@ a.btn-svg {
   text-decoration: none;
 
   background-color: transparent;
+
+  margin-top: 20px;
 }
 
 a.btn-svg svg {
