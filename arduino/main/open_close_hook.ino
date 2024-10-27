@@ -8,7 +8,7 @@
 #include "driver/ledc.h"
 #include "esp_err.h"
 
-#define OPEN_CLOSE_GPIO 23
+#define OPEN_CLOSE_GPIO 35
 #define OPEN_OUTPUT_GPIO (gpio_num_t)OPEN_CLOSE_GPIO
 
 static bool open_close_action(bool input)

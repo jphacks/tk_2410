@@ -15,6 +15,8 @@
 void add_favorite() {
     // お気に入りの処理
     Serial.println("Add favorite");
+    epd_clear();
+    
 }
 
 void reset() {
