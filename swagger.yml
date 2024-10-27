@@ -70,7 +70,7 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
-  /books/qrcode:
+  /qrcode:
     post:
       summary: "QRコードを取得"
       requestBody:
@@ -232,15 +232,18 @@ components:
           schema:
             type: object
             properties:
-              ePaperImage:
+              qrcode:
                 type: string
-                description: "画像データ(0~3)"
-              sessionId:
-                type: string
-                description: "電子ペーパーのセッションID"
+                description: "画像データ(0/1)"
+              width:
+                type: integer
+              height:
+                type: integer
           example:
-            ePaperImage: "0101010101..."
+            qrcode: "0101010101..."
             sessionId: "sessionId"
+            width: 200
+            height: 800
 
     AnonymousLoginResponse:
       description: "セッションIDをCookieに設定して返却"
