@@ -14,7 +14,6 @@ COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Copy the rest of the application code
 COPY . .
 
 # Expose the Flask port

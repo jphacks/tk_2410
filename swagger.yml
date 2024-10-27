@@ -3,6 +3,10 @@ info:
   title: WebSocket API Example
   version: 1.0.0
 
+servers:
+  - url: http://localhost:5000
+    description: "開発環境"
+
 paths:
   # front用
   /anonymous-login:
@@ -57,11 +61,9 @@ paths:
           $ref: '#/components/responses/ServerError'
 
   /books/random:
-    post:
+    get:
       summary: "ランダムな本のIDと画像を取得"
       description: "ランダムに選ばれた本のIDと画像データをBase64エンコード形式で返します"
-      requestBody:
-        $ref: '#/components/requestBodies/ePaperId'
       responses:
         '200':
           $ref: '#/components/responses/RandomBookData'
@@ -69,8 +71,10 @@ paths:
           $ref: '#/components/responses/ServerError'
 
   /books/qrcode:
-    get:
+    post:
       summary: "QRコードを取得"
+      requestBody:
+        $ref: '#/components/requestBodies/deviceIdentifier'
       responses:
         '200':
           $ref: '#/components/responses/QRCodeRetrieved'
@@ -143,6 +147,22 @@ components:
               - ePaperId
           example:
             ePaperId: "12345"
+
+    deviceIdentifier:
+      description: "電子ペーパーのMACアドレス"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              deviceIdentifier:
+                type: string
+                description: "電子ペーパーのMACアドレス"
+            required:
+              - deviceIdentifier
+          example:
+            deviceIdentifier: "2ce14b7e-18e6-4f32-b66d-c9b6128744a8"
 
     AnonymousLogin:
       description: "デバイスID"
