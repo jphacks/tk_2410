@@ -28,11 +28,17 @@ void open_close_hook() {
     // 開く検知をしたら
     if (gpio_get_level(OPEN_OUTPUT_GPIO) == 1) {
         if (open_close_action(true)) {
-            Serial.println("Open");
+            epd_clear();
+            epd_set_color(BLACK, WHITE);
+            epd_disp_string("Open", 0, 0);
+            epd_udpate();
         }
     } else {
         if (open_close_action(false)) {
-            Serial.println("Close");
+            epd_clear();
+            epd_set_color(BLACK, WHITE);
+            epd_disp_string("Close", 0, 0);
+            epd_udpate();
         }
     }
     vTaskDelay(100 / portTICK_PERIOD_MS);
