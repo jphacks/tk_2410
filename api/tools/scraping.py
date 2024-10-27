@@ -30,11 +30,11 @@ def scraping():
             title = titleLink.get_text(strip=True)
             nameLink = nameLine.find("a")
             name = nameLink.get_text(strip=True)
-            # content = extractContentFromUrl(
-            #     "https://bungei-zorozoro.com" + url
-            # )
+            content = extractContentFromUrl(
+                "https://bungei-zorozoro.com" + titleUrl
+            )
             print("https://bungei-zorozoro.com" + titleUrl, title, name)
-            # print(content)
+            print(content)
             time.sleep(1)
 
         pager = soup.find("ul", class_="pager")
