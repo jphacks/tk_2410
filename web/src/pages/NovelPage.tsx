@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const containerStyle: React.CSSProperties = {
   justifyContent: "center",
@@ -23,40 +23,55 @@ const verticalTextStyle: React.CSSProperties = {
 };
 
 const NovelPage: React.FC = () => {
-  const [textContent, setTextContent] = useState<string>("");
-  const [animatedText, setAnimatedText] = useState<string>("");
+  const [fullText, setFullText] = useState<string>("");
+  const [displayedText, setDisplayedText] = useState<string>("");
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch("../../public/message.txt")
+    fetch("message.txt")
       .then((response) => response.text())
-      .then((data) => setTextContent(data.replace(/<br\/>/g, "\n")))
+      .then((data) => {
+        setFullText(data.replace(/<br\/>/g, "\n"));
+      })
       .catch((error) => console.error("Error loading text file:", error));
   }, []);
 
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < textContent.length) {
-        setAnimatedText((prev) => prev + textContent[index]);
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
+  const animateText = useCallback(() => {
+    if (currentIndex < fullText.length) {
+      setDisplayedText((prev) => prev + fullText[currentIndex]);
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      setIsAnimating(false);
+    }
+  }, [currentIndex, fullText]);
 
-    return () => clearInterval(interval);
-  }, [textContent]);
+  useEffect(() => {
+    if (fullText && isAnimating) {
+      const timer = setTimeout(animateText, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [fullText, currentIndex, isAnimating, animateText]);
+
+  const toggleAnimation = () => {
+    setIsAnimating(!isAnimating);
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.code === "Space") {
+        event.preventDefault();
+        toggleAnimation();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [isAnimating]);
 
   return (
-    <div style={containerStyle}>
-      <div style={verticalTextStyle}>
-        {animatedText.split("\n").map((line) => (
-          <React.Fragment key={line}>
-            {line}
-            <br />
-          </React.Fragment>
-        ))}
-      </div>
+    <div style={containerStyle} onClick={toggleAnimation}>
+      <div style={verticalTextStyle}>{displayedText}</div>
     </div>
   );
 };
