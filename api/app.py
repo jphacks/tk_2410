@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, make_response
+from flask_cors import CORS
 from logging import getLogger
 from werkzeug.exceptions import HTTPException
 
@@ -12,6 +13,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user:password@db/hoshizora'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.ensure_ascii = False
+
+CORS(app, supports_credentials=True, origins=["https://suitably-moral-octopus.ngrok-free.app"])
 
 # Initialize the database with the app
 init_db(app)
