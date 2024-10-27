@@ -29,8 +29,7 @@ def get_qr_code():
         encoded, width, height = image_encoder.encode_image(qr_code)
 
     return jsonify({
-        "ePaperId": e_paper_id,
         "width": width,
         "height": height,
-        "encoded": encoded,
+        "qrcode": encoded,
     }), 200

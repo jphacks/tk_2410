@@ -239,9 +239,6 @@ components:
                 type: integer
               height:
                 type: integer
-              sessionId:
-                type: string
-                description: "電子ペーパーのセッションID"
           example:
             qrcode: "0101010101..."
             sessionId: "sessionId"
