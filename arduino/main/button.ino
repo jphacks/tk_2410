@@ -13,15 +13,16 @@
 #define BUTTON_OUTPUT_GPIO (gpio_num_t)BUTTON_GPIO
 
 void add_favorite() {
-    // お気に入りの処理
-    Serial.println("Add favorite");
     epd_clear();
-    
+    epd_disp_string("Add favorite !", 0, 0);
+    delay(3000);
 }
 
 void reset() {
-    // リセット処理
-    Serial.println("Reset");
+    epd_clear();
+    epd_disp_string("Reset", 0, 0);
+    delay(3000);
+    epd_clear();
 }
 
 void    pressed_button_hook() {
@@ -29,12 +30,12 @@ void    pressed_button_hook() {
     while (gpio_get_level(BUTTON_OUTPUT_GPIO) == 1) {
         count++;
         vTaskDelay(100 / portTICK_PERIOD_MS);
-        if (count >= 10) {
+        if (count >= 20) {
             reset();
             break;
         }
     }
-    if (count < 10) {
+    if (5 <= count && count < 20) {
         add_favorite();
     }
 }

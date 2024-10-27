@@ -31,14 +31,15 @@ void open_close_hook() {
             epd_clear();
             epd_set_color(BLACK, WHITE);
             epd_disp_string("Open", 0, 0);
-            epd_udpate();
+            delay(3000);
+            epd_clear();
         }
     } else {
         if (open_close_action(false)) {
-            epd_clear();
             epd_set_color(BLACK, WHITE);
             epd_disp_string("Close", 0, 0);
-            epd_udpate();
+            delay(3000);
+            epd_clear();
         }
     }
     vTaskDelay(100 / portTICK_PERIOD_MS);
